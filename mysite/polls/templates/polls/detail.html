@@ -11,8 +11,6 @@
 <input type="submit" value="Vote" />
 </form>
 <form action="{% url 'polls:add' question.id %}" method="post">
-    {% csrf_token %}
-    <input id="choice" type="text" name="choice" value="{{ choice.choice_text }}">
-    <label for="choice">Add an Answer and Vote: </label>
-    <input type="submit" value="Submit">
-</form>
+                {% csrf_token %}
+                <input id="choice" type="text" placeholder="Add New Answer and vote!" name="choice" value="{{ choice.choice_text }}">
+            </form>

@@ -38,11 +38,11 @@
                     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
                
                 {% endfor %}
-                <input type="submit" value="Vote" />
+                <input type="submit" value="Vote"s />
             </form>
             <form action="{% url 'polls:add' question.id %}" method="post">
                 {% csrf_token %}
-                <input id="choice" type="text" placeholder="Add New Answer and Vote!" name="choice" value="{{ choice.choice_text }}">
+                <input id="choice" type="text" placeholder="Add New Answer and vote!" name="choice" value="{{ choice.choice_text }}">
             </form>
             </div>
         {% endfor %}

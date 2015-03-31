@@ -77,14 +77,14 @@ def add(request, question_id):
             return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
 def addq(request):
-    p = Question.objects.all()
+    p = Question.objects.all().order_by('-pub_date')
     
     try :
         selected_question = request.POST['question']
     except:
         return render(request, 'polls/index.html', {
                     'latest_question_list':p,
-                    'error_message': "Please enter a viable answer!",
+                    'error_message': "Please submit a question",
                      })
     else:
         if p.filter(question_text=selected_question).exists():
@@ -95,7 +95,7 @@ def addq(request):
         if selected_question == '':
             return render(request, 'polls/index.html', {
                 'latest_question_list':p,
-                'error_message': "You didn't fill in an answer!",
+                'error_message': "You didn't fill in a question!",
                  })
         else:
             q= Question(question_text=request.POST['question'], pub_date=timezone.now())
