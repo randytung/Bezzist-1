@@ -6,30 +6,37 @@
     <title> Bezzist</title>
 </head>
 
+
+
+
 <body>
     <div class="header">
         <div class="container">
             <div class="logo">
-                <h1> Bezzist</h1>
+                <h1> Bezzist</h1> 
             </div>
         </div>
     </div>
-    <div class=container> 
+    
+    <div class=container>
+    
     <div class="content">
+        <div class= error> {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}</div>
     {% if latest_question_list %}
         <ol>
         {% for question in latest_question_list %}
+            <div class="choice"> 
             <h2 class="question" >{{ question.question_text }}</h2>
     
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            {% if error_message1 %}<p><strong>{{ error_message1 }}</strong></p>{% endif %}
             
             <form action="{% url 'polls:vote' question.id %}" method="post">
                 {% csrf_token %}
                 {% for choice in question.choice_set.all %}
-                <div class="choice"> 
+                
                     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
                     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-                </div>
+               
                 {% endfor %}
                 <input type="submit" value="Vote" />
             </form>
@@ -37,8 +44,13 @@
                 {% csrf_token %}
                 <input id="choice" type="text" placeholder="Add New Answer and Vote!" name="choice" value="{{ choice.choice_text }}">
             </form>
+            </div>
         {% endfor %}
         </ol>
+        <form action="{% url 'polls:addq' %}" method="post">
+                {% csrf_token %}
+                <input id="question" type="text" placeholder="Add a new Question!" name="question" value="{{ question.question_text }}">
+        </form>
     </div>
     </div>
     {% else %}

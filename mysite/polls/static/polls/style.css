@@ -18,7 +18,13 @@ body {
     width:100%;
     color: white;
 }
-
+.error {
+    color:black;
+    width:100%;
+    font-size: 20px;
+    
+    
+}
 .choice {
     background: #FCE5E8;
     color:black;
@@ -26,7 +32,6 @@ body {
 
 .logo {
     margin: 0 auto;
-    
     border: 5px;
     align: center;
     font-family: 'Helvetica';

@@ -13,4 +13,6 @@ urlpatterns = patterns('',
         name='vote'),#ex: /polls/5/vote
      url(r'^(?P<question_id>\d+)/add/$', views.add,
         name='add'),#ex: /polls/5/add
+     url(r'^addq/$', views.addq,
+        name='addq'),#ex: /polls/add
 )

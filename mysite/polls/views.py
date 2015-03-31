@@ -75,5 +75,33 @@ def add(request, question_id):
             p.choice_set.create(choice_text=request.POST['choice'], votes=1)
             p.save()
             return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
-        
+
+def addq(request):
+    p = Question.objects.all()
+    
+    try :
+        selected_question = request.POST['question']
+    except:
+        return render(request, 'polls/index.html', {
+                    'latest_question_list':p,
+                    'error_message': "Please enter a viable answer!",
+                     })
+    else:
+        if p.filter(question_text=selected_question).exists():
+            return render(request, 'polls/index.html', {
+                    'question':p,
+                    'error_message': "That question is already there!",
+                     })
+        if selected_question == '':
+            return render(request, 'polls/index.html', {
+                'latest_question_list':p,
+                'error_message': "You didn't fill in an answer!",
+                 })
+        else:
+            q= Question(question_text=request.POST['question'], pub_date=timezone.now())
+            q.save()
+            return render(request, 'polls/index.html', {
+                    'latest_question_list':p,
+                    'error_message': "Thanks for submitting a question!",
+                     })
         
