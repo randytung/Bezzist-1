@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+<head>
+    <title> Bezzist</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <h1> Bezzist</h1>
+            </div>
+        </div>
+    </div>
+    <div class=container> 
+    <div class="content">
+    {% if latest_question_list %}
+        <ol>
+        {% for question in latest_question_list %}
+            <h2 class="question" >{{ question.question_text }}</h2>
+    
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            
+            <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+                {% for choice in question.choice_set.all %}
+                <div class="choice"> 
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+                </div>
+                {% endfor %}
+                <input type="submit" value="Vote" />
+            </form>
+            <form action="{% url 'polls:add' question.id %}" method="post">
+                {% csrf_token %}
+                <input id="choice" type="text" placeholder="Add New Answer and Vote!" name="choice" value="{{ choice.choice_text }}">
+            </form>
+        {% endfor %}
+        </ol>
+    </div>
+    </div>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+</body>

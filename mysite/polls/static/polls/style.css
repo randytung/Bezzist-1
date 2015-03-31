@@ -1,0 +1,44 @@
+body {
+    width:100%;
+    margin: auto;
+}
+
+.header {
+    background:#F0FFFF;
+    width:100%;
+    top:0;
+    position:fixed;
+    border-top: solid 10px #3588FF;
+    border-bottom: solid 5px #F0F0F0;
+    
+
+}
+.question {
+    background:#D81238;
+    width:100%;
+    color: white;
+}
+
+.choice {
+    background: #FCE5E8;
+    color:black;
+}
+
+.logo {
+    margin: 0 auto;
+    
+    border: 5px;
+    align: center;
+    font-family: 'Helvetica';
+
+}
+.container {
+    width: 960px;
+    margin:0 auto;
+    border:100px;
+}
+
+.content {
+	margin: 20px auto;
+    padding: 80px;
+}
